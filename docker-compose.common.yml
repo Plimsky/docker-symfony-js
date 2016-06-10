@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  back:
+    build: ./docker/back
+  front:
+    build: ./docker/front
+  mysql:
+    build: ./docker/mysql

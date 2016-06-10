@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  back:
+    extends:
+      file: docker-compose.common.yml
+      service: back
+    volumes:
+      - .:/var/www
+    ports:
+      - 8000:80
+  front:
+    extends:
+      file: docker-compose.common.yml
+      service: front
+    volumes:
+      - .:/var/www
+    ports:
+      - 80:80
+  mysql:
+    extends:
+      file: docker-compose.common.yml
+      service: mysql
+    ports:
+      - 3306:3306
