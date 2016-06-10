@@ -25,14 +25,14 @@ RUN apt-get install -f -y --force-yes rsyslog
 RUN apt-get install -f -y --force-yes php5-common php5-cli php5-curl php5-gd php5-intl php5-mcrypt php5-mysql php5-readline php5-dev libapache2-mod-php5 libssl-dev libpcre3-dev libpcre3 libssl-doc
 RUN apt-get install -f -y --force-yes apache2 php5-xdebug phpunit mysql-client
 
+# Conf Apache
+ADD php.ini /etc/php5/apache2/php.ini
+
 # Conf Php
 RUN sed -i 's#;date.timezone =#date.timezone = Europe/Paris#g' /etc/php5/apache2/php.ini
 RUN sed -i 's#;date.timezone =#date.timezone = Europe/Paris#g' /etc/php5/cli/php.ini
 RUN a2enmod php5 rewrite headers
 RUN php5dismod xdebug
-
-# Conf Apache
-ADD php.ini /etc/php5/apache2/php.ini
 
 # Clean
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
