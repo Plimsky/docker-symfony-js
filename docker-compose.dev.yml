@@ -6,7 +6,7 @@ services:
       file: docker-compose.common.yml
       service: back
     volumes:
-      - .:/var/www
+      - back:/var/www
     ports:
       - 8000:80
   front:
@@ -14,7 +14,7 @@ services:
       file: docker-compose.common.yml
       service: front
     volumes:
-      - .:/var/www
+      - front:/var/www
     ports:
       - 3001:80
   mysql:

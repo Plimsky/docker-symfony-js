@@ -26,18 +26,21 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -f -y --force-yes nodejs
 RUN apt-get install -f -y --force-yes build-essential
 
-# Install Php
-RUN apt-get install -f -y --force-yes php5-common php5-cli php5-curl php5-gd php5-intl php5-mcrypt php5-mysql php5-readline php5-dev libapache2-mod-php5 libssl-dev libpcre3-dev libpcre3 libssl-doc
-RUN apt-get install -f -y --force-yes apache2 php5-xdebug phpunit mysql-client
+# Install PHP7 + Apache
+RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
+RUN wget -O- https://www.dotdeb.org/dotdeb.gpg | apt-key add -
+RUN apt-get update
+RUN apt-get install -f -y --force-yes apache2 php7.0 libapache2-mod-php7.0 php7.0-mysql php7.0-curl php7.0-json php7.0-gd php7.0-mcrypt php7.0-msgpack php7.0-memcached php7.0-intl php7.0-sqlite3 php7.0-gmp php7.0-geoip php7.0-mbstring php7.0-xml php7.0-zip
+RUN apt-get install -f -y --force-yes php7.0-xdebug phpunit mysql-client
 
 # Conf Apache
-ADD php.ini /etc/php5/apache2/php.ini
+ADD php.ini /etc/php7.0/apache2/php.ini
 
 # Conf Php
-RUN a2enmod php5 rewrite headers proxy proxy_http proxy_connect
-RUN sed -i 's#;date.timezone =#date.timezone = Europe/Paris#g' /etc/php5/apache2/php.ini
-RUN sed -i 's#;date.timezone =#date.timezone = Europe/Paris#g' /etc/php5/cli/php.ini
-RUN php5dismod xdebug
+RUN a2enmod php7.0 rewrite headers proxy proxy_http proxy_connect
+RUN sed -i 's#;date.timezone =#date.timezone = Europe/Paris#g' /etc/php/7.0/apache2/php.ini
+RUN sed -i 's#;date.timezone =#date.timezone = Europe/Paris#g' /etc/php/7.0/cli/php.ini
+RUN phpdismod xdebug
 
 # Clean
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
