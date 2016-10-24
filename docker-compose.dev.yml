@@ -9,6 +9,9 @@ services:
       - ./back:/var/www
     ports:
       - 8000:80
+    environment:
+      - SYMFONY_ENV=dev
+      - SYMFONY_DEBUG=1
   front:
     extends:
       file: docker-compose.common.yml
