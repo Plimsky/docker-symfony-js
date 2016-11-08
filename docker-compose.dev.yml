@@ -19,7 +19,7 @@ services:
     volumes:
       - ./front:/var/www
     ports:
-      - 3001:80
+      - 3000:3000
   mysql:
     extends:
       file: docker-compose.common.yml
