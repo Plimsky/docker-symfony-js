@@ -6,17 +6,21 @@ services:
       file: docker-compose.common.yml
       service: back
     volumes:
-      - .:/var/www
+      - ./back:/var/www
     ports:
       - 8000:80
+    environment:
+      - SYMFONY_ENV=dev
+      - SYMFONY_DEBUG=1
   front:
     extends:
       file: docker-compose.common.yml
       service: front
     volumes:
-      - .:/var/www
+      - ./front:/var/www
     ports:
-      - 3001:80
+      - 80:80
+      - 3000:3000
   mysql:
     extends:
       file: docker-compose.common.yml
