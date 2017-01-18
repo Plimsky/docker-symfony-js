@@ -34,7 +34,7 @@ RUN apt-get install -f -y --force-yes apache2 php7.0 libapache2-mod-php7.0 php7.
 RUN apt-get install -f -y --force-yes php7.0-xdebug phpunit mysql-client
 
 # Conf Apache
-ADD php.ini /etc/php7.0/apache2/php.ini
+#ADD php.ini /etc/php7.0/apache2/php.ini
 
 # Conf Php
 RUN a2enmod php7.0 rewrite headers proxy proxy_http proxy_connect
@@ -56,7 +56,7 @@ WORKDIR /var/www
 
 # Expose Ports
 EXPOSE 80
-EXPOSE 3001
+EXPOSE 3000
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 RUN ln -s /etc/supervisor/supervisord.conf /etc/supervisord.conf
