@@ -7,3 +7,8 @@ services:
     build: ./docker/front
   mysql:
     build: ./docker/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
