@@ -8,7 +8,8 @@ services:
     volumes:
       - ./back:/var/www
     ports:
-      - 8000:80
+      - 8000:8000
+      - 8080:8080
     environment:
       - SYMFONY_ENV=dev
       - SYMFONY_DEBUG=1
